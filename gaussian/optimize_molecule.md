@@ -71,11 +71,15 @@ formchk Lsavuconazonium.chk Lsavuconazonium.fchk
 obabel -ifchk Lsavuconazonium.fchk -oxyz -O Lsavuconazonium.xyz
 obabel -ixyz Lsavuconazonium.xyz -omol2 -O Lsavuconazonium.mol2
 
-g16 < Lsavuconazonium.gjf > Lsavuconazonium.log
+g16 < Meropenem.gjf > Meropenem.log
 formchk Meropenem.chk Meropenem.fchk
 obabel -ifchk Meropenem.fchk -oxyz -O Meropenem.xyz
 obabel -ixyz Meropenem.xyz -omol2 -O Meropenem.mol2
 
+g16 < Paliperidone.gjf > Paliperidone.log
+formchk Paliperidone.chk Paliperidone.fchk
+obabel -ifchk Paliperidone.fchk -oxyz -O Paliperidone.xyz
+obabel -ixyz Paliperidone.xyz -omol2 -O Paliperidone.mol2
 
 
 
