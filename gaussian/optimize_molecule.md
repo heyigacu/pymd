@@ -1,6 +1,6 @@
 
-## optimize molecular conformation by Gaussian
 
+## install Gaussian
 ### install gaosi16-A03-AVX2.tbz in Linux system
 ```
 tar -xjvf gaosi16-A03-AVX2.tbz
@@ -23,3 +23,23 @@ export GAUSS_SCRDIR=$g16root/src
 ```
 must install Gaussian and install GaussView next, and install GaussView at same directory as Gaussian
 ```
+
+## optimize molecular conformation by Gaussian
+### use GaussView to generate com or gjf input file
+### run 
+```
+g16 < test.com > test.log
+```
+will generate test.chk file
+### transform chk to fchk
+```
+formchk test.chk test.fchk
+```
+### transform fchk to mol2
+```
+sudo apt-get install openbabel
+obabel -ifchk test.fchk -oxyz -O test.xyz
+obabel -ixyz test.xyz -omol2 -O test.mol2
+```
+
+
