@@ -59,5 +59,18 @@ Hund定则：在能量相同的轨道中，电子会尽可能保持未成对，�
 (2)在填充具有相同能量的亚轨道时，电子首先会单独占据各个轨道，并且具有相同的自旋方向，即只有当每个等能轨道都至少有一个电子后，电子才会开始成对。\
 (3)任何两个电子不能占据同一个量子态，因此一个轨道最多只能容纳两个自旋相反的电子，即亚轨道电子成对自旋相反。\
 
+```
 
+g16 < Fulvestrant.gjf > Fulvestrant.log
+formchk Fulvestrant.chk Fulvestrant.fchk
+obabel -ifchk Fulvestrant.fchk -oxyz -O Fulvestrant.xyz
+obabel -ixyz Fulvestrant.xyz -omol2 -O Fulvestrant.mol2
+
+g16 < Lsavuconazonium.gjf > Lsavuconazonium.log
+formchk Lsavuconazonium.chk Lsavuconazonium.fchk
+obabel -ifchk Lsavuconazonium.fchk -oxyz -O Lsavuconazonium.xyz
+obabel -ixyz Lsavuconazonium.xyz -omol2 -O Lsavuconazonium.mol2
+
+
+```
 
