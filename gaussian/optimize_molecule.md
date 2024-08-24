@@ -20,8 +20,17 @@ export GAUSS_SCRDIR=$g16root/src
 ```
 
 ### install Gaussian16win in Linux system
-```
 must install Gaussian and install GaussView next, and install GaussView at same directory as Gaussian
+```
+%chk=Fulvestrant.chk
+%mem=16GB
+%nprocshared=16
+# opt B3LYP/6-31G(d) freq geom=connectivity
+
+Fulvestrant
+
+0 1
+!!!... your coordinates, need change!!!
 ```
 
 ## optimize molecular conformation by Gaussian
