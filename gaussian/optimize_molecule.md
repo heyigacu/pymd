@@ -10,7 +10,7 @@ mkdir scratch
 
 edit ~/.bashrc
 
-export g16root=/opt/g16
+export g16root=/data/softwares/g16
 export PATH=$PATH:$g16root/bsd
 source $g16root/bsd/g16.profile
 export GAUSS_EXEDIR=$g16root
