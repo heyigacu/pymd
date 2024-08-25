@@ -1,7 +1,6 @@
-
 #!bin/bash
 workdir=$(pwd)
-cuda_device=0
+cuda_device=4
 num_residues=729
 no_ligand=729
 echo $workdir
@@ -98,7 +97,7 @@ cat > $workdir/ligamd_pre.in << EOF
 
 EOF
 
-cat > $workdir/prod.in << EOF
+cat > $workdir/ligamd_md.in << EOF
 &cntrl
   imin=0, irest=1, ntx=5,
   ioutfm=1, nstlim=500000000,
@@ -130,5 +129,3 @@ CUDA_VISIBLE_DEVICES=$cuda_device pmemd.cuda -O -i npt.in -o npt.out -p com_solv
 CUDA_VISIBLE_DEVICES=$cuda_device pmemd.cuda -O -i equil.in -o equil.out -p com_solv.prmtop -c density.rst -r equil.rst -ref density.rst -x equil.dcd
 CUDA_VISIBLE_DEVICES=$cuda_device pmemd.cuda -O -i ligamd_pre.in -o ligamd_pre.out -p com_solv.prmtop -c equil.rst -r ligamd_pre.rst -x ligamd_pre.dcd
 CUDA_VISIBLE_DEVICES=$cuda_device pmemd.cuda -O -i ligamd_pre.in -o ligamd_md.out -p com_solv.prmtop -c ligamd_pre.rst -r ligamd_md.rst -x ligamd_md.dcd
-
-
