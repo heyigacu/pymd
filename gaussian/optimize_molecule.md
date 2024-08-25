@@ -84,4 +84,11 @@ obabel -ixyz Paliperidone.xyz -omol2 -O Paliperidone.mol2
 
 
 ```
+### install Multiwfn
+http://sobereva.com/multiwfn/
+(1)HUMO
+(2)LUMO
+```
+
+```
 
