@@ -1,4 +1,6 @@
 
+
+## dowload vina and mgltools
 ### adt tools 
 https://vina.scripps.edu/downloads/
 ### vina
@@ -18,8 +20,21 @@ out = ligand_out.pdbqt
 
 ```
 
+## dock in windows
+```
+python D:/mgltools/Lib/site-packages/AutoDockTools/Utilities24/prepare_ligand4.py -l Fulvestrant.mol2 -o Fulvestrant.pdbqt > Fulvestrant.log
+python D:/mgltools/Lib/site-packages/AutoDockTools/Utilities24/prepare_ligand4.py -l Lsavuconazonium.mol2 -o Lsavuconazonium.pdbqt > Lsavuconazonium.log
+python D:/mgltools/Lib/site-packages/AutoDockTools/Utilities24/prepare_ligand4.py -l Meropenem.mol2 -o Meropenem.pdbqt > Meropenem.log
+python D:/mgltools/Lib/site-packages/AutoDockTools/Utilities24/prepare_ligand4.py -l Paliperidone.mol2 -o Paliperidone.pdbqt > Paliperidone.log
 
-####
+vina --config congfig_Fulvestrant.txt > Fulvestrant.log
+vina --config congfig_Lsavuconazonium.txt > Lsavuconazonium.log
+vina --config congfig_Meropenem.txt > Meropenem.log
+vina --config congfig_Paliperidone.txt  > Paliperidone.log
+
+```
+
+## dock in linux
 ```
 python D:/mgltools/Lib/site-packages/AutoDockTools/Utilities24/prepare_ligand4.py -l Fulvestrant.mol2 -o Fulvestrant.pdbqt > Fulvestrant.log
 python D:/mgltools/Lib/site-packages/AutoDockTools/Utilities24/prepare_ligand4.py -l Lsavuconazonium.mol2 -o Lsavuconazonium.pdbqt > Lsavuconazonium.log
