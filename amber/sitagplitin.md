@@ -110,3 +110,68 @@ quit
 
 ```
 
+
+```
+
+# meropenem
+```
+antechamber -fi mol2 -fo mol2 -i meropenem_init.mol2 -o meropenem.mol2 -c bcc -nc 0 -pf y -at gaff2 -m 1 -gm "%mem=8000MB" -gn "%nproc=4"
+parmchk2 -i meropenem.mol2 -o meropenem.frcmod -f mol2 -s gaff2
+
+pdb4amber -i dpp4.pdb -o dpp4_H.pdb --reduce
+
+source leaprc.protein.ff19SB
+source leaprc.gaff2
+source leaprc.water.opc
+loadamberparams frcmod.ionslm_126_opc
+loadamberparams meropenem.frcmod
+
+meropenem = loadmol2 meropenem.mol2
+rec_H = loadpdb dpp4_H.pdb
+
+com = combine{rec_H,meropenem}
+savepdb com com_dry.pdb
+saveamberparm com com_dry.prmtop com_dry.inpcrd
+solvatebox com OPCBOX 10.0
+addions com Na+ 0
+addions com Cl- 0
+savepdb com com_solv.pdb
+saveamberparm com com_solv.prmtop com_solv.inpcrd
+quit
+
+
+
+```
+
+```
+
+# paliperidone
+```
+antechamber -fi mol2 -fo mol2 -i paliperidone_init.mol2 -o paliperidone.mol2 -c bcc -nc 0 -pf y -at gaff2 -m 1 -gm "%mem=8000MB" -gn "%nproc=4"
+parmchk2 -i paliperidone.mol2 -o paliperidone.frcmod -f mol2 -s gaff2
+
+pdb4amber -i dpp4.pdb -o dpp4_H.pdb --reduce
+
+source leaprc.protein.ff19SB
+source leaprc.gaff2
+source leaprc.water.opc
+loadamberparams frcmod.ionslm_126_opc
+loadamberparams paliperidone.frcmod
+
+paliperidone = loadmol2 paliperidone.mol2
+rec_H = loadpdb dpp4_H.pdb
+
+com = combine{rec_H,paliperidone}
+savepdb com com_dry.pdb
+saveamberparm com com_dry.prmtop com_dry.inpcrd
+solvatebox com OPCBOX 10.0
+addions com Na+ 0
+addions com Cl- 0
+savepdb com com_solv.pdb
+saveamberparm com com_solv.prmtop com_solv.inpcrd
+quit
+
+
+
+
+```
