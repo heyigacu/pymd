@@ -148,7 +148,6 @@ quit
 # paliperidone
 ```
 antechamber -fi mol2 -fo mol2 -i paliperidone_init.mol2 -o paliperidone.mol2 -c bcc -nc 0 -pf y -at gaff2 -m 1 -gm "%mem=8000MB" -gn "%nproc=4"
-antechamber -fi mol2 -fo mol2 -i paliperidone.mol2 -o paliperidone.mol2 -c bcc -nc 0 -pf y -at gaff2 -m 1 -gm "%mem=8000MB" -gn "%nproc=4"
 
 parmchk2 -i paliperidone.mol2 -o paliperidone.frcmod -f mol2 -s gaff2
 
