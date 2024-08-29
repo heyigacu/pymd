@@ -29,7 +29,7 @@ quit
 
 # lsavuconazonium
 ```
-antechamber -fi mol2 -fo mol2 -i lsavuconazonium_init.mol2 -o lsavuconazonium.mol2 -c bcc -nc 0 -pf y -at gaff2 -m 2 -gm "%mem=8000MB" -gn "%nproc=4"
+antechamber -fi mol2 -fo mol2 -i lsavuconazonium_init.mol2 -o lsavuconazonium.mol2 -c bcc -nc 1 -pf y -at gaff2 -m 1 -gm "%mem=8000MB" -gn "%nproc=4"
 parmchk2 -i lsavuconazonium.mol2 -o lsavuconazonium.frcmod -f mol2 -s gaff2
 
 pdb4amber -i dpp4.pdb -o dpp4_H.pdb --reduce
