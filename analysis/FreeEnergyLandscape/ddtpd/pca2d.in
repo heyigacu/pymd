@@ -1,0 +1,12 @@
+parm nowat.prmtop
+trajin nowat.dcd 1 5000 1
+rms first :1-728&!@H=
+average crdset proavy
+run
+rms ref proavy :1-728&!@H=
+matrix covar name MyMatrix :1-728&!@H=
+createcrd CRD1
+run
+runanalysis diagmatrix MyMatrix vecs 2 name MyEvecs
+crdaction CRD1 projection evecs MyEvecs :1-728&!@H= out pca2d.dat beg 1 end 2
+quit

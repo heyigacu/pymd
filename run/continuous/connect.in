@@ -1,0 +1,8 @@
+     
+parm nowat.prmtop 
+trajin nowat_pre.dcd 
+trajin nowat_next.dcd 1 8.0 1
+autoimage
+trajout nowat.dcd 
+run
+quit

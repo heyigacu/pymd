@@ -1,0 +1,7 @@
+parm your_topology_file.prmtop 
+trajin nowat_pre.dcd 
+trajin nowat_next.dcd 
+autoimage
+trajout nowat.dcd 
+run
+quit

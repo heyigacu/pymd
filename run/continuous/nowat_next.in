@@ -1,0 +1,6 @@
+     
+parm com_solv.prmtop 
+trajin ligamd_md_next.dcd 1 -1 1
+trajout nowat_next.dcd 
+run
+quit
