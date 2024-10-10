@@ -1,9 +1,0 @@
-
-## How to define box parameters from the original ligand of PDB in PyMOL 
-
-### 1. download GetBox-PyMOL-Plugin
-https://github.com/MengwuXiao/Getbox-PyMOL-Plugin \
-then please unzip it
-
-### 2. isntall GetBox-PyMOL-Plugin in PyMOL
-Plugin -> Plugin Manager -> Install New Plugin
