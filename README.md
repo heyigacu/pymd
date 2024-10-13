@@ -24,7 +24,8 @@ and will generate score table including each dock in $task_name/best_scores.txt.
 #### 1.2.2 cluster
 change mol2_dir to mol2 directory generate by section 1.2.1 above in prepare/dock/cluster.py  
 then run prepare/dock/cluster.py  
-and will generate cluster figure in same directory of mol2_dir:
+and will generate cluster figure in same directory of mol2_dir as cluster.png:
+![clutser.png](/prepare/dock/cluster.png)
 
 
 
