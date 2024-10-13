@@ -26,7 +26,8 @@ change mol2_dir to mol2 directory generate by section 1.2.1 above in prepare/doc
 then run prepare/dock/cluster.py  
 and will generate cluster figure in same directory of mol2_dir as cluster.png:
 ![clutser.png](/prepare/dock/cluster.png)
-
+then input a cutoff value for cluster according to cluster.png  
+final will generate run_?_best.mol2 as reprensentive structure of biggest cluster.
 
 
 ## Run
