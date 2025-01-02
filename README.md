@@ -32,6 +32,19 @@ final will generate run_?_best.mol2 as reprensentive structure of biggest cluste
 
 ## Run
 
+### cmd 
+
+you can run below to get correct command and run it
+```
+bash submit_cmd.sh -h
+```
+if you use slurm, you can run below after altering parameters
+```
+bash submit_cmd_slurm.sh
+```
+
+
+
 ## Analysis
 
 ## others
