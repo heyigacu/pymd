@@ -13,7 +13,7 @@ show_help() {
     echo "  md_steps       Number of MD steps (e.g., 250000000)"
     echo
     echo "Example:"
-    echo "nohup bash $0 0 com_solv.prmtop com_solv.inpcrd 728 310.0 250000000 &"
+    echo "nohup bash $0 0 com_solv.prmtop com_solv.inpcrd 285 310.0 250000000 &"
 }
 
 # Check if help is requested
@@ -55,13 +55,13 @@ heat NVT 200ps
   ntt=3, gamma_ln=2.0,
   ntp=0, ntb=1, cut=8.0,
   ntr=1, restraintmask=':1-$num_residues', restraint_wt=1.0,
-  tempi=0.0, temp0=$temprature,
+  tempi=0.0, temp0=$temperature,
   iwrap=1,
   ig=-1,
   ntpr=1000, ntwx=1000, ntwr=10000,
 /
 
-&wt type='TEMP0', istep1=0, istep2=10000, value1=0.0, value2=$temprature, &end
+&wt type='TEMP0', istep1=0, istep2=10000, value1=0.0, value2=$temperature, &end
 &wt type='END', &end
 
 EOF
@@ -77,7 +77,7 @@ density NPT 200ps
   ntr=1, restraintmask=':1-$num_residues', restraint_wt=1.0,
   iwrap=1,
   ig=-1,
-  tempi=$temprature, temp0=$temprature,
+  tempi=$temperature, temp0=$temperature,
   ntpr=1000, ntwx=1000, ntwr=10000,
 /
 
@@ -93,7 +93,7 @@ equillibrium 500ps (no restraint)
   ntp=1, ntb=2, pres0=1.0, cut=8.0, taup=2.0,
   iwrap=1,
   ig=-1,
-  tempi=$temprature, temp0=$temprature,
+  tempi=$temperature, temp0=$temperature,
   ntpr=1000, ntwx=1000, ntwr=10000,
 /
 
@@ -104,7 +104,7 @@ cat > $workdir/cmd.in << EOF
   imin=0, irest=0, ntx=1,
   ioutfm=1, nstlim=250000000,
   dt=0.002,
-  tempi=$temprature, temp0=$temprature,
+  tempi=$temperature, temp0=$temperature,
   ntc=2, ntf=1,
   ntt=3, gamma_ln=2.0,
   ntp=0, ntb=1, pres0=1.0, cut=8.0,
