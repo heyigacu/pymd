@@ -5,6 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.colors import LinearSegmentedColormap
+from sklearn.cluster import DBSCAN
+from sklearn.cluster import KMeans
+
 PARENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 def write_pca_in_amber_cpptraj(pca_in_filepath, num_residues):
@@ -58,36 +61,59 @@ def ddtpd2frame(pca_2d_path='project_fix.dat', pca_3d_path='result2.txt', extrac
     file2 = pd.read_csv(pca_3d_path, header=None, sep='\s+')
     file2.columns = ['X','Y','Z']
 
-    def find_top(top):
+    def find_top(file2, top):
         top_min_indices = file2['Z'].nsmallest(top).index
-        top_min_values = file2.loc[top_min_indices, ['X', 'Y']].values
+        top_min_values = file2.loc[top_min_indices, ['X', 'Y', 'Z']].values
         return top_min_values
     
-    def find_0():
+    def find_0(file2):
         top_min_indices = file2[file2['Z']==0].index
-        top_min_values = file2.loc[top_min_indices, ['X', 'Y']].values
+        top_min_values = file2.loc[top_min_indices, ['X', 'Y', 'Z']].values
         return top_min_values
 
+    def find_dbscan(file2):
+        db = DBSCAN(eps=5, min_samples=3)
+        file2 = file2[file2['Z'] < 1]
+        file2['cluster'] = db.fit_predict(file2[['X', 'Y']])
+        min_z_points = []
+        for cluster_label in file2['cluster'].unique():
+            if cluster_label == -1:
+                continue
+            cluster_data = file2[file2['cluster'] == cluster_label]
+            min_z_idx = cluster_data['Z'].idxmin()
+            min_z_point = cluster_data.loc[min_z_idx, ['X', 'Y', 'Z']]
+            min_z_points.append(min_z_point)
+        return min_z_points
+    
+    def find_kmeans(file2, n_clusters=3):
+        file2 = file2[file2['Z'] < 1]
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+        file2['cluster'] = kmeans.fit_predict(file2[['X', 'Y']])
+        min_z_points = []
+        for cluster_label in file2['cluster'].unique():
+            cluster_data = file2[file2['cluster'] == cluster_label]
+            min_z_idx = cluster_data['Z'].idxmin()
+            min_z_point = cluster_data.loc[min_z_idx, ['X', 'Y', 'Z']]
+            min_z_points.append(min_z_point)
+        return min_z_points
+
+
     matching_indices = []
-    for value in find_0():
-        x, y = value
+    top_min_values = find_kmeans(file2, n_clusters=3)
+    for value in top_min_values:
+        x, y, z = value
         distances = np.sqrt((file1['A'] - x) ** 2 + (file1['B'] - y) ** 2)
         min_index = distances.idxmin()
         matching_indices.append(min_index)
 
-    top_min_values = find_0()
-    print(top_min_values)
-    print(file1.iloc[matching_indices,:])
-    print("Matching indices in file1 for the smallest three values in file2:", matching_indices)
-
     with open(extract_coordinate_path,'w') as f:
         f.write('Frame\tX\tY\tZ\n')
         for i,index in enumerate(matching_indices):
-            f.write('{}\t{}\t{}\t{}\n'.format(index+1,top_min_values[i][0],top_min_values[i][1],0))
+            f.write('{}\t{}\t{}\t{}\n'.format(index+1,top_min_values[i][0],top_min_values[i][1],top_min_values[i][2]))
 
     with open(extract_frame_in_path,'w') as f:
         f.write('parm nowat.prmtop\n')
-        for index in  matching_indices:
+        for index in matching_indices:
             f.write('trajin nowat.dcd {} {}\ntrajout frame_{}.pdb pdb\nrun\nclear trajin\n'.format(index+1,index+1,index+1))
         f.write('quit\n')
 
@@ -129,19 +155,8 @@ def plot_pca2d(df, name):
     plt.savefig(name+'_pca_2d.png', dpi=300)
 
 if __name__=='__main__':
-    """
-    http://sobereva.com/usr/uploads/file/20151115/20151115220021_45515.rar
-    ddtpd.exe 
-    """
-    for sub in ['a','b','c','d']:
-        write_pca_in_amber_cpptraj(pca_in_filepath='_pca_amber.in')
-        # cpptraj -i sub_pca_amber.in 
-        # will generate pca_2d.dat
-        amberpca2gmxpca('pca_2d.dat','pca_2d_gmx.dat')
-        ddtpd('pca_2d_gmx.dat')
-        # will generate result.txt and result2.txt 
-        df = ddtpd2matrix('result2.txt')
-        plot_pca_3d(df,sub)
+    for sub in ['pca3d']:
+        # amberpca2gmxpca('pca2d.dat','pca_2d_gmx.dat')
+        # df = ddtpd2matrix('result2.txt')
+        # plot_pca_3d(df,sub)
         ddtpd2frame('pca_2d_gmx.dat', 'result2.txt')
-        # will generate extract_coordinate.txt and extract_frame.in
-        # cpptraj -i extract_frame.in
