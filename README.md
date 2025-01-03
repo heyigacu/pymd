@@ -47,6 +47,15 @@ bash submit_cmd_slurm.sh
 
 ## Analysis
 
+### MMPBSA
+
+for example, the ligand (peptide) is Residue 729-733, please modify gen_mmpbsa.py, and run below
+```
+python gen_mmpbsa.py
+ante-MMPBSA.py -p nowat.prmtop -c com.prmtop -r rec.prmtop -l lig.prmtop -s ':WAT,Na+,Cl-' -n ':729-733' 
+nohup MMPBSA.py -O -i mmpbsa.in -o MMPBSA.dat -sp nowat.prmtop -cp com.prmtop -rp rec.prmtop -lp lig.prmtop -y nowat.dcd &
+```
+
 ## others
 other tools
 
