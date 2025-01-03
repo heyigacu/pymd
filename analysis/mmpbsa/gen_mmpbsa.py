@@ -21,7 +21,7 @@ def get_nearby_residues(pdb_file, output_file='mmpbsa.in', num_residues=728, lig
     with open(output_file, 'w') as f:
         f.write(
 f"""&general             
-    startframe=1, endframe=5000, interval=10,
+    startframe=1, endframe=5000, interval=100,
     verbose = 1,
     ligand_mask = \':{ligand_resi}\',
     receptor_mask = \':1-{num_residues}\',
@@ -39,9 +39,9 @@ f"""&general
     print(f"Residue numbers saved to {output_file}")
 
 # Example usage
-get_nearby_residues(pdb_file="com_dry.pdb", output_file='mmpbsa.in', ligand_resi='729', distance=8.0)
+get_nearby_residues(pdb_file="com_dry.pdb", output_file='mmpbsa.in', ligand_resi='729-733', distance=8.0)
 """
-ante-MMPBSA.py -p com_solv.prmtop -c com.prmtop -r rec.prmtop -l lig.prmtop -s ':WAT,Na+,Cl-' -n ':729'
-nohup MMPBSA.py -O -i mmpbsa.in -o MMPBSA.dat -sp com_solv.prmtop -cp com.prmtop -rp rec.prmtop -lp lig.prmtop -y ligamd_md.dcd &
-"""
+ante-MMPBSA.py -p nowat.prmtop -c com.prmtop -r rec.prmtop -l lig.prmtop -s ':WAT,Na+,Cl-' -n ':729-733' 
+nohup MMPBSA.py -O -i mmpbsa.in -o MMPBSA.dat -sp nowat.prmtop -cp com.prmtop -rp rec.prmtop -lp lig.prmtop -y nowat.dcd &
 
+"""
