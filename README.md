@@ -9,17 +9,27 @@ a set of python tools for molecular dynamics
 * At physiological pH, the side chains of Arg and His carry a +1 charge, with histidine protonated at the NE atom.
 
 #### pre-optimization
+First, you need to use [GaussView](https://gaussian.com/gaussview6/) to generate the `.gjf` coordinates, and replace the header section of the file with the following content.
 ```
 %chk=DDHR_preopt.chk
 %NProcShared=24
 %Mem=96GB
-# PM6 Opt
+# PM6 Opt SCRF=(PCM,Solvent=Water)
 
 DDHR_preopt
 
 -1 1
 ```
-#### in water
+g16 < DDHR_preopt.gjf > DDHR_preopt.log
+formchk DDHR_preopt.chk DDHR_preopt.fchk
+```
+
+```
+then you will get DDHR_preopt.chk
+```
+
+```
+#### production in water
 ```
 %chk=DDHR.chk
 %NProcShared=24
