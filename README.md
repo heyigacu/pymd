@@ -5,10 +5,10 @@ a set of python tools for molecular dynamics
 
 ### 1.1 gausssian
 
-#### 1.1.1 pre optimize
+#### charge
 * At physiological pH, the side chains of Arg and His carry a +1 charge, with histidine protonated at the NE atom.
 
-*  pre-optimization
+#### pre-optimization
 ```
 %chk=DDHR_preopt.chk
 %NProcShared=24
@@ -19,7 +19,7 @@ DDHR_preopt
 
 -1 1
 ```
-*  in water
+#### in water
 ```
 %chk=DDHR.chk
 %NProcShared=24
