@@ -3,7 +3,35 @@
 a set of python tools for molecular dynamics
 ## 1.Prepare
 
-### 1.1
+### 1.1 gausssian
+
+#### 1.1.1 pre optimize
+* At physiological pH, the side chains of Arg and His carry a +1 charge, with histidine protonated at the NE atom.
+
+*  pre-optimization
+```
+%chk=DDHR_preopt.chk
+%NProcShared=24
+%Mem=96GB
+# PM6 Opt
+
+DDHR_preopt
+
+-1 1
+```
+*  in water
+```
+%chk=DDHR.chk
+%NProcShared=24
+%Mem=96GB
+# B3LYP/6-31G(d) Opt Freq SCRF=(PCM,Solvent=Water)
+
+DDHR
+
+-1 1
+```
+
+
 
 ### 1.2 molecular dock for ligand-eceptor
 #### 1.2.1 vina 
